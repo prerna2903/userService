@@ -36,7 +36,7 @@ public class UserServiceBuyerController {
 	/*****************BUYER RELATED ***************************************/
 	
 	//Buyer login
-	@PostMapping(value = "/buyer/login",consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "api/buyer/login",consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO) {
 		boolean islogin=userBuyerService.login(loginDTO);
 		System.out.println(islogin);
@@ -53,7 +53,7 @@ public class UserServiceBuyerController {
 	}
 	
 	//registering a buyer
-	@PostMapping(value = "/buyer/register",consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "api/buyer/register",consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> registerBuyer(@RequestBody BuyerDTO buyerDTO)throws Exception{
 		try {
 			logger.info("Registering buyer :"+ buyerDTO.toString());
@@ -70,7 +70,7 @@ public class UserServiceBuyerController {
 	}
 	
 	//get all the buyers
-	@GetMapping(value= "/buyer",  produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value= "api/buyer",  produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<BuyerDTO> showBuyers(){
 		logger.info("fetching buyers list");
 		List<BuyerDTO> buyers=userBuyerService.showBuyers();
@@ -79,7 +79,7 @@ public class UserServiceBuyerController {
 	}
 	
 	//removal of buyer
-	@PutMapping(value="/buyer/{buyerId}")
+	@PutMapping(value="api/buyer/{buyerId}")
 	public ResponseEntity<String> removeBuyer(@PathVariable Integer buyerId) throws Exception{
 		try {
 			logger.info("Removing buyer: "+buyerId);
@@ -97,7 +97,7 @@ public class UserServiceBuyerController {
 	}
 	
 	//update reward point
-	@PutMapping(value="/buyer/{buyerId}/rewardpoints/{amount}")
+	@PutMapping(value="api/buyer/{buyerId}/rewardpoints/{amount}")
 	public ResponseEntity<String> updateRewardPoints(@PathVariable Integer buyerId, @PathVariable Double amount){
 		if(userBuyerService.updateRewardPoints(buyerId, amount)) {
 			logger.info("Updating rewards for buyer:"+buyerId);
@@ -111,7 +111,7 @@ public class UserServiceBuyerController {
 	}
 	
 	//use reward points for discount
-	@GetMapping(value="/buyer/{buyerId}/discount/{amount}")
+	@GetMapping(value="api/buyer/{buyerId}/discount/{amount}")
 	public Double useRewardPoints(@PathVariable Integer buyerId,@PathVariable Double amount){
 		return userBuyerService.useRewardPoints(buyerId,amount);
 		
@@ -119,7 +119,7 @@ public class UserServiceBuyerController {
 	}
 	
 	//set isPrivileged
-	@PutMapping(value = "/buyer/{buyerId}/privileged")
+	@PutMapping(value = "api/buyer/{buyerId}/privileged")
 	public Boolean isPrivileged(@PathVariable Integer buyerId){
 		logger.info("setting privilege for buyer: "+ buyerId);
 		return userBuyerService.isPrivileged(buyerId);
@@ -127,7 +127,7 @@ public class UserServiceBuyerController {
 	}
 	
 	//get isPriviledged
-	@GetMapping(value="/buyer/{buyerId}/privileged")
+	@GetMapping(value="api/buyer/{buyerId}/privileged")
 	public Boolean getisPrivileged(@PathVariable Integer buyerId) {
 		logger.info("getting privilege for buyer: "+ buyerId);
 		return userBuyerService.getisPrivileged(buyerId);

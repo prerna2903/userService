@@ -38,7 +38,7 @@ public class UserServiceController {
 	/*****************ORDER RELATED ***************************************/
 	
 	//move from wishList to cart or adding product to cart
-	@PostMapping(value = "/cart",consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "api/cart",consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> addToCart(@RequestBody CartDTO cartDTO) {
 		logger.info("Adding to cart :"+ cartDTO.toString());
 		userService.addToCart(cartDTO);
@@ -48,7 +48,7 @@ public class UserServiceController {
 	}
 	
 	//move from cart to wishList or add product to wishList
-	@PostMapping(value = "/wishlist",consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "api/wishlist",consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> addToWishlist(@RequestBody WishlistDTO wishlistDTO) {
 		logger.info("Adding to wishlist :"+wishlistDTO.toString());
 		userService.addToWishlist(wishlistDTO);
@@ -58,7 +58,7 @@ public class UserServiceController {
 	}
 	
 	//remove particular product from cart
-	@DeleteMapping(value = "/cart")
+	@DeleteMapping(value = "api/cart")
 	public ResponseEntity<String> removeFromCart(@RequestBody CartDTO cartDTO) {
 		ResponseEntity<String> response=null;
 			logger.info("removing from cart:"+ cartDTO.toString());
@@ -70,7 +70,7 @@ public class UserServiceController {
 	}
 	
 	//checkout from cart for particular buyer
-	@DeleteMapping(value = "/cart/{buyerId}")
+	@DeleteMapping(value = "api/cart/{buyerId}")
 	public Boolean checkOutFromCart(@PathVariable Integer buyerId) {
 		try {
 			logger.info("Checking out from cart for buyer"+buyerId);
@@ -84,7 +84,7 @@ public class UserServiceController {
 	}
 	
 	//show cart for particular buyer
-	@GetMapping(value= "/cart/{buyerId}",  produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value= "api/cart/{buyerId}",  produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<CartDTO> showCart(@PathVariable Integer buyerId){
 		logger.info("list of cart items for buyer :"+buyerId);
 		List<CartDTO> cartList=userService.showCart(buyerId);

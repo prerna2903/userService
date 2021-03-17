@@ -42,7 +42,7 @@ public class UserServiceSellerController {
 	/*****************SELLER RELATED ***************************************/
 	
 	//Buyer login
-	@PostMapping(value = "/seller/login",consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "api/seller/login",consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO) {
 		logger.info("Login for seller :"+loginDTO.toString());
 		boolean islogin=UserSellerService.login(loginDTO);
@@ -58,7 +58,7 @@ public class UserServiceSellerController {
 		}
 	
 	//registering a seller
-	@PostMapping(value = "/seller/register",consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "api/seller/register",consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> registerSeller(@RequestBody SellerDTO sellerDTO)throws Exception{
 		logger.info("Registering for seller :"+ sellerDTO);
 		try {
@@ -74,7 +74,7 @@ public class UserServiceSellerController {
 	}
 	
 	//get all the sellers
-	@GetMapping(value= "/seller",  produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value= "api/seller",  produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<SellerDTO> showSellers(){
 		logger.info("showing list of sellers");
 		List<SellerDTO> sellers=UserSellerService.showSellers();
@@ -83,7 +83,7 @@ public class UserServiceSellerController {
 	}
 	
 	//removal of seller
-	@PutMapping(value="/seller/{sellerId}")
+	@PutMapping(value="api/seller/{sellerId}")
 	public ResponseEntity<String> removeSeller(@PathVariable Integer sellerId) throws Exception{
 		logger.info("setting seller inactive for :"+sellerId);
 		try {
